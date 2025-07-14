@@ -92,6 +92,7 @@ Also, here is a link for more details: https://workos.com/docs/sso/2-configure-a
 Hey Julia,  
 Thank you for reaching out. Yes, WorkOS supports passing custom data through the SSO flow using the state parameter. It’s included in your initial auth request and returned to your app after authentication. This is perfect for things like tracking IDs or internal references.
 
+
 Here’s a quick Python example using Flask and the WorkOS SDK:
 
 ```python
@@ -106,4 +107,4 @@ state = request.args.get("state")
 # Use state as needed in your app
 
 You can also grab the user profile with get_profile_and_token at this point.
-For More detail here in the SSO guide (https://workos.com/docs/sso/1-add-sso-to-your-app/add-a-callback-endpoint). 
+For More detail here in the SSO guide (https://workos.com/docs/sso/1-add-sso-to-your-app/add-a-callback-endpoint).
