@@ -68,37 +68,42 @@ REDIRECT_URI=http://127.0.0.1:5000/callback
 (4) Complete the form in the WorkOS Test Provider
 (5) You’ll be redirected to a page showing user and organization info
 
-Example Customer Email Responses
+---
 
-Email 1: Mark (Product Manager, prospective customer)
+## 📨 Example Customer Email Responses
 
-Hey Mark,
-Thanks for reaching out. WorkOS acts as the Service Provider (SP) in the SAML flow, not the Identity Provider (IdP). That’s why you won’t see any IdP metadata XML coming from WorkOS. Instead, you would need to connect an external IdP (like Okta, Azure AD, or others) by uploading your metadata to WorkOS.
-If you are trying to configure SSO for a tool like SparkNova and you’re looking to have WorkOS act as the IdP in the middle, that setup likely won’t align with how WorkOS is designed. In that case, SparkNova would be the SP, and you would connect your IdP directly to them. WorkOS would not sit between the two.
-Here’s a quick overview that breaks down where WorkOS fits in a typical SAML setup: SSO Overview – WorkOS Docs (https://workos.com/docs/sso)
-Also, here is a link for more details: https://workos.com/docs/sso/2-configure-a-redirect-uri/identity-provider-initiated-sso.
+Below are two examples of how I would respond to common customer questions in a Developer Success Engineer role.
 
+---
 
+### Email 1: Mark (Product Manager, prospective customer)
 
-Email 2: Julia (Software Engineer, current standalone Single Sign-On customer)
+Hey Mark,  
+Thanks for reaching out. WorkOS acts as the Service Provider (SP) in the SAML flow, not the Identity Provider (IdP). That’s why you won’t see any IdP metadata XML coming from WorkOS. Instead, you would need to connect an external IdP (like Okta, Azure AD, or others) by uploading your metadata to WorkOS.  
+If you are trying to configure SSO for a tool like SparkNova and you’re looking to have WorkOS act as the IdP in the middle, that setup likely won’t align with how WorkOS is designed. In that case, SparkNova would be the SP, and you would connect your IdP directly to them. WorkOS would not sit between the two.  
+Here’s a quick overview that breaks down where WorkOS fits in a typical SAML setup:  
+SSO Overview – WorkOS Docs: https://workos.com/docs/sso  
+Also, here is a link for more details: https://workos.com/docs/sso/2-configure-a-redirect-uri/identity-provider-initiated-sso
 
-Hey Julia,
+---
+
+### Email 2: Julia (Software Engineer, current standalone Single Sign-On customer)
+
+Hey Julia,  
 Thank you for reaching out. Yes, WorkOS supports passing custom data through the SSO flow using the state parameter. It’s included in your initial auth request and returned to your app after authentication. This is perfect for things like tracking IDs or internal references.
 
 Here’s a quick Python example using Flask and the WorkOS SDK:
+
+```python
 auth_url = workos.sso.get_authorization_url(
     connection="conn_123",
     redirect_uri="https://yourapp.com/callback",
     state="custom_id_ABC123"
 )
+
 Then in your callback:
 state = request.args.get("state")
 # Use state as needed in your app
 
 You can also grab the user profile with get_profile_and_token at this point.
 For More detail here in the SSO guide (https://workos.com/docs/sso/1-add-sso-to-your-app/add-a-callback-endpoint).
-
-
-
-
- 
