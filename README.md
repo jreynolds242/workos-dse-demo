@@ -106,4 +106,4 @@ state = request.args.get("state")
 # Use state as needed in your app
 
 You can also grab the user profile with get_profile_and_token at this point.
-For More detail here in the SSO guide (https://workos.com/docs/sso/1-add-sso-to-your-app/add-a-callback-endpoint).
+For More detail here in the SSO guide (https://workos.com/docs/sso/1-add-sso-to-your-app/add-a-callback-endpoint). 
