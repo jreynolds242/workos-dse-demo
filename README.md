@@ -47,7 +47,7 @@ source venv/bin/activate
 ### 3. Install Dependencies
 pip install -r requirements.txt
 
-** if youdont have reqyurements.txt just run
+** if you dont have requirements.txt just run
 pip install flask workos python-dotenv
 
 
