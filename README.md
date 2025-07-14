@@ -40,24 +40,27 @@ This is a simple Flask application that demonstrates Single Sign-On (SSO) integr
 git clone https://github.com/yourusername/workos-dse-demo.git
 cd workos-dse-demo
 
-### 2.Create and activate a virtual environment
+
+2. Create and activate a virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
-### 3. Install Dependencies
+python3 -m venv venv
+source venv/bin/activate
+
+3. Install dependencies
 pip install -r requirements.txt
 
-** if you dont have requirements.txt just run
+If you do not have a requirements.txt file, you can run:
 pip install flask workos python-dotenv
 
-
-### 4. Create a .env file with the following contents
+4. Create a .env file with the following contents
 WORKOS_API_KEY=sk_test_your_key_here
 WORKOS_CLIENT_ID=client_01ABC123XYZ
 CONNECTION_ID=conn_test_01XYZABCDEF
 REDIRECT_URI=http://127.0.0.1:5000/callback
 
-### 5. Run the App locally
+5. Run the app locally
 
 (1) python3 app.py
 (2) Open the browser to http://127.0.0.1:5000
@@ -65,7 +68,7 @@ REDIRECT_URI=http://127.0.0.1:5000/callback
 (4) Complete the form in the WorkOS Test Provider
 (5) You’ll be redirected to a page showing user and organization info
 
-
+Example Customer Email Responses
 
 Email 1: Mark (Product Manager, prospective customer)
 
