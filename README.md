@@ -35,42 +35,39 @@ This is a simple Flask application that demonstrates Single Sign-On (SSO) integr
 ## Setup Instructions
 
 ### 1. Clone the repo
-
 ```bash
 git clone https://github.com/yourusername/workos-dse-demo.git
 cd workos-dse-demo
-
-
-2. Create and activate a virtual environment
+```
+### 2. Create and activate a virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
-python3 -m venv venv
-source venv/bin/activate
-
-3. Install dependencies
+### 3. Install dependencies
 pip install -r requirements.txt
 
-If you do not have a requirements.txt file, you can run:
+** If you do not have a requirements.txt file, you can run:
 pip install flask workos python-dotenv
 
-4. Create a .env file with the following contents
+### 4. Create a .env file with the following contents
+```env
 WORKOS_API_KEY=sk_test_your_key_here
 WORKOS_CLIENT_ID=client_01ABC123XYZ
 CONNECTION_ID=conn_test_01XYZABCDEF
 REDIRECT_URI=http://127.0.0.1:5000/callback
+```
 
-5. Run the app locally
-
+### 5. Run the app locally
+```env
 (1) python3 app.py
 (2) Open the browser to http://127.0.0.1:5000
 (3) Click 'Sign in with SSO' 
 (4) Complete the form in the WorkOS Test Provider
 (5) You’ll be redirected to a page showing user and organization info
-
+```
 ---
 
-## 📨 Example Customer Email Responses
+## Example Customer Email Responses
 
 Below are two examples of how I would respond to common customer questions in a Developer Success Engineer role.
 
@@ -79,9 +76,13 @@ Below are two examples of how I would respond to common customer questions in a 
 ### Email 1: Mark (Product Manager, prospective customer)
 
 Hey Mark,  
+
 Thanks for reaching out. WorkOS acts as the Service Provider (SP) in the SAML flow, not the Identity Provider (IdP). That’s why you won’t see any IdP metadata XML coming from WorkOS. Instead, you would need to connect an external IdP (like Okta, Azure AD, or others) by uploading your metadata to WorkOS.  
+
 If you are trying to configure SSO for a tool like SparkNova and you’re looking to have WorkOS act as the IdP in the middle, that setup likely won’t align with how WorkOS is designed. In that case, SparkNova would be the SP, and you would connect your IdP directly to them. WorkOS would not sit between the two.  
+
 Here’s a quick overview that breaks down where WorkOS fits in a typical SAML setup:  
+
 SSO Overview – WorkOS Docs: https://workos.com/docs/sso  
 Also, here is a link for more details: https://workos.com/docs/sso/2-configure-a-redirect-uri/identity-provider-initiated-sso
 
@@ -105,6 +106,6 @@ auth_url = workos.sso.get_authorization_url(
 Then in your callback:
 state = request.args.get("state")
 # Use state as needed in your app
-
+```
 You can also grab the user profile with get_profile_and_token at this point.
 For More detail here in the SSO guide (https://workos.com/docs/sso/1-add-sso-to-your-app/add-a-callback-endpoint).
