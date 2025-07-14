@@ -1,0 +1,41 @@
+from flask import Flask, redirect, request, render_template
+from dotenv import load_dotenv
+from workos import WorkOSClient
+import os
+
+load_dotenv()
+
+workos = WorkOSClient(
+    api_key=os.getenv("WORKOS_API_KEY"),
+    client_id=os.getenv("WORKOS_CLIENT_ID")
+)
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template("login.html")
+
+@app.route("/login")
+def login():
+    auth_url = workos.sso.get_authorization_url(
+        connection=os.getenv("CONNECTION_ID"),
+        redirect_uri=os.getenv("REDIRECT_URI"),
+        state="debug-state"
+    )
+    return redirect(auth_url)
+
+@app.route("/callback")
+def callback():
+    code = request.args.get("code")
+    profile_data = workos.sso.get_profile_and_token(code)
+    profile = profile_data.profile
+    return render_template(
+        "profile.html",
+        first_name=profile.get("first_name"),
+        last_name=profile.get("last_name"),
+        email=profile.get("email")
+    )
+
+if __name__ == "__main__":
+    app.run(debug=True)
